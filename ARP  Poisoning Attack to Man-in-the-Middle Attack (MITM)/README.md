@@ -222,6 +222,10 @@ except KeyboardInterrupt:
 
 - Khối **except KeyboardInterrupt** sẽ bắt các ngoại lệ được ném ra khi người dùng nhấn `Ctrl+C` để kết thúc chương trình. Trong khối này, các hàm restore() được gọi để khôi phục lại trạng thái ban đầu của gateway và máy mục tiêu trước khi kết thúc chương trình.
 
+![image](https://hackmd.io/_uploads/HkY5sDEAa.png)
+
+![image](https://hackmd.io/_uploads/B1gcuv406.png)
+
 ### Tiến hành khai thác
 
 đầu tiên dùng lệnh `arp -a`
