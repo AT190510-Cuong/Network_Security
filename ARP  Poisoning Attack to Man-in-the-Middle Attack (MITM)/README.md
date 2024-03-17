@@ -141,7 +141,7 @@ Kẻ tấn công ARP spoofing giả vờ là cả hai bên tham gia của một 
 
 - để khách quan mình sẽ tiến hành reconnaissance với nmap
 
-```bash!
+```bash
 $ sudo nmap -sV -sC 192.176.45.1/24
 ```
 
@@ -179,7 +179,7 @@ mình sử dụng thư viện Scapy của Python để thực hiện tấn công
 - thư viện này đã được cài đặt sẵn trên kali linux
 - tấn công với đoạn script trong file **arpspoof.py** như sau:
 
-```python!
+```python
 import scapy.all as scapy
 import time
 
@@ -244,7 +244,7 @@ trước khi tấn công để máy tính của victim vẫn nhận được cá
 
 - để cho phép các gói tin trả về được đi qua lab của chúng ta forward đến máy victim chúng ta cần dùng lệnh
 
-```bash!
+```bash
 $ sudo su
 $ echo 1 > /proc/sys/net/ipv4/ip_forward
 $ exit
