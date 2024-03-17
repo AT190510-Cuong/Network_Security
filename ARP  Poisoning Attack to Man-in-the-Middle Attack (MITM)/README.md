@@ -27,6 +27,8 @@
 
 #### Mạng có dậy
 
+![image](https://hackmd.io/_uploads/S1VkCPVRa.png)
+
 - ARP bảo đảm kết nối giữa địa chỉ MAC và địa chỉ IP. Bằng cách truyền đi ARP yêu cầu cùng với địa chỉ IP, switch sẽ biết được thông tin về địa chỉ MAC kết nối từ phản hồi của host. Trong trường hợp không có hoặc không tìm được ánh xạ, nguồn sẽ gửi bản tin đến tất cả các nodes. Chỉ có node với địa chỉ MAC kết hợp với IP đó phản hồi yêu cầu, chuyển tiếp gói tin chứa ánh xạ địa chỉ MAC. Switch sẽ ghi nhớ địa chỉ MAC và thông tin về port kết nối vào bảng CAM cố định độ dài.
 
 ![image](https://hackmd.io/_uploads/BJSV814A6.png)
@@ -321,3 +323,4 @@ vậy mình đã khai thác **ARP Poisoning** để sniff các packet tài kho�
 - https://hackmd.io/@JohnathanHuuTri/rkdzitQtn?utm_source=preview-mode&utm_medium=rec
 - https://thepythoncode.com/article/building-arp-spoofer-using-scapy
 - https://www.youtube.com/watch?v=C_FKDs7a-mk
+- https://www.youtube.com/watch?v=A7nih6SANYs
