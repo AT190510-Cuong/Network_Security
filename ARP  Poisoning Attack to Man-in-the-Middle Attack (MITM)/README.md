@@ -179,7 +179,7 @@ mình sử dụng thư viện Scapy của Python để thực hiện tấn công
 - thư viện này đã được cài đặt sẵn trên kali linux
 - tấn công với đoạn script trong file **arpspoof.py** như sau:
 
-```python!
+```python
 import scapy.all as scapy
 import time
 
