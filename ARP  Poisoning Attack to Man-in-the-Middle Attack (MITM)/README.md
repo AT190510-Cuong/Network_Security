@@ -37,6 +37,8 @@
 
 - Như đã thấy ở hình trên, nguồn tạo ra ARP yêu cầu bằng cách gửi một gói tin ARP. Một node có địa chỉ MAC nhận được yêu cầu sẽ phản hồi lại gói tin. Frame sẽ tràn ra tất cả các port (trừ port nhận frame) nếu đầu vào bảng CAM quá tải. Điều này cũng xảy ra khi địa chỉ MAC đích trong frame là địa chỉ truyền tin.
 
+![image](https://hackmd.io/_uploads/SJ5_tv9Aa.png)
+
 - Kĩ thuật MAC flooding được dùng để chuyển switch thành một hub, trong đó switch bắt đầu truyền gói tin. Trong trường hợp này, user có thể lấy gói tin không dành cho mình.
 
 ### Các loại tấn công ARP Poisoning
