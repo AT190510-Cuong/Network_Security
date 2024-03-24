@@ -544,6 +544,36 @@ và được kết quả trả về tìm thấy 2 hosts nữa và tool đã thê
 
 - các bạn có thể xem cách khai thác dns spooding với công cụ **ettercap** <a href="https://www.youtube.com/watch?v=g-XZpTxusS8&t=280s"> tại đây</a> và <a href="https://www.youtube.com/watch?v=TNr2DlwtIu0"> tại đây</a>
 
+- do browser lưu lại domain ip nên mình cần chuyển sang mạng LAN khác
+
+![image](https://hackmd.io/_uploads/H1N3V4aCT.png)
+
+- với ip của attacker là 192.168.0.114
+
+![ảnh](https://hackmd.io/_uploads/ryWfeETCp.png)
+
+- ip của victim là 192.168.0.119
+
+![image](https://hackmd.io/_uploads/SyAxBNaAa.png)
+
+- mình scan được 5 host
+
+![ảnh](https://hackmd.io/_uploads/HknlWVpR6.png)
+
+- tiếp theo mình tạo lại trang facebook clone và để victim truy cập vào trang web này
+
+![ảnh](https://hackmd.io/_uploads/r1AvbNpRp.png)
+
+- trang login hiện ra và victim nhập tài khoản
+
+![image](https://hackmd.io/_uploads/rJ7UHEa0p.png)
+
+- các thông tin sẽ được hiện ở máy attacker
+
+![ảnh](https://hackmd.io/_uploads/SkwtbV6A6.png)
+
+![ảnh](https://hackmd.io/_uploads/BkHnbV6RT.png)
+
 ## Tham khảo
 
 - https://wiki.matbao.net/kb/bao-mat-may-chu-linux-huong-dan-cau-hinh-iptables-can-ban/#2-tao-rule-iptables
