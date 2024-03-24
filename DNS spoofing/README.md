@@ -111,7 +111,7 @@ xem bảng ARP mình được
 
 kiểm tra firewal trên máy attacker bằng lệnh
 
-```bash
+```bash!
 iptables -L -v
 ```
 
@@ -129,7 +129,7 @@ bậy giờ chúng ta sẽ xây dựng đoạn script để sửa đổi gói ti
   - **Input chain** : lọc gói khi đi vào trong server.
   - **Output chain** : lọc gói khi ra khỏi server.
 
-```python
+```python!
 from scapy.all import *
 from netfilterqueue import NetfilterQueue
 import os
@@ -195,7 +195,7 @@ nhưng khi chạy nếu gặp phải các gói tin chứa các domain khác thì
 
 mình dùng đoạn code sau để khai thác dns spoofing trên máy victim mà chỉ khi gặp các gói tin trong list của chúng ta nó mới thay đổi
 
-```python
+```python!
 from scapy.all import *
 from netfilterqueue import NetfilterQueue
 import os
@@ -286,7 +286,7 @@ except KeyboardInterrupt:
 
 - sau đó dùng module của python để tạo máy chủ web http chạy ở port 80 trên máy của attacker
 
-```bash
+```bash!
 python3 -m http.server  80
 ```
 
@@ -312,13 +312,13 @@ chúng ta chạy file arpspoof.py để khai thác MITM như bài trước và c
 
 - mình sửa câu lệnh trong iptables thành
 
-```bash
+```bash!
 iptables -A INPUT -j NFQUEUE --queue-num 0
 ```
 
 để lọc các gói khi đi vào trong máy tính attacker và chúng ta sẽ khai thác trên máy local của attacker và được đoạn code sau:
 
-```python
+```python!
 from scapy.all import *
 from netfilterqueue import NetfilterQueue
 import os
@@ -430,7 +430,119 @@ các bạn có thể xem thêm <a href="https://www.youtube.com/watch?v=FBF-xXX7
 - bởi vì cơ chế lưu cache đó địa chỉ IP của google.com đã được lưu trong cache của máy tính và trình duyệt không phải đi tìm trên mạng nên chúng ta không thể thay đổi gói tin DNS của victim
 - vậy chúng ta cần đợi cache hết hạn hoặc dùng lệnh `ipconfig /flushdns` để xóa cache trên máy victim ở đây là Window 7
 - và có thể chúng ta cần cấu hình nat cho firewall của attacker để máy victim có thể ping được đến nó như dự định của chúng ta
-- các bạn có thể xem cách khai thác dns spooding với công cụ **ettercap** <a href="https://www.youtube.com/watch?v=g-XZpTxusS8&t=280s"> tại đây</a>
+
+## Dùng ettercap để tấn công dns spoofing
+
+- đầu tiên mình cần tìm đường dẫn file `etter.dns` và vào đó thêm các ánh xạ domain IP
+
+![ảnh](https://hackmd.io/_uploads/Skr46ZaCa.png)
+
+- mình ánh xạ các domain từ facebook.com đến địa chỉ IP của máy attacker là 192.176.45.101
+
+![ảnh](https://hackmd.io/_uploads/Bywl6ZaCp.png)
+
+- sau đó mình chạy ettercap để thực hiện tấn công
+
+![ảnh](https://hackmd.io/_uploads/SJYV0W6AT.png)
+
+- mình vào **Hosts -> Scan for hosts** để scan các hosts hiện tại trong mạng LAN này
+
+![ảnh](https://hackmd.io/_uploads/BylHRbaAp.png)
+
+và được kết quả trả về tìm thấy 2 hosts nữa và tool đã thêm vào host list
+
+![ảnh](https://hackmd.io/_uploads/S1LuRWa0T.png)
+
+- mình vào **Host -> Hosts list** để xem các hosts vừa được thêm
+
+![ảnh](https://hackmd.io/_uploads/B1o3CbaCp.png)
+
+- sau đó mình add IP gateway vào target 1 , add IP 192.176.45.102 của victim vào target 2
+
+![ảnh](https://hackmd.io/_uploads/HkK7JGaA6.png)
+
+- sau đó mình vào **Plugins -> Manage plugins** để thêm tấn công dns_spoof
+
+![ảnh](https://hackmd.io/_uploads/SkdmxGa0T.png)
+
+- nhưng trước đó chúng ta cần tấn công ARP poisoning để trở thành MITM
+
+![ảnh](https://hackmd.io/_uploads/B1IoeGaCa.png)
+
+- chọn OK và mình tấn công ARP poisoing
+
+![ảnh](https://hackmd.io/_uploads/HywKez6Cp.png)
+
+- chọn ô vuông góc bên trái để stop và start lại cuộc tấn công
+
+![ảnh](https://hackmd.io/_uploads/HkEJZG60a.png)
+
+- lúc này mình đợi victim truy cập vào facebook.com
+
+- mình đóng giả làm victim và thử lệnh `arp -a` thấy đã bị arp poisoning
+
+![ảnh](https://hackmd.io/_uploads/Bk5w0G6Rp.png)
+
+- mình ping thử facebook.com và www.facebook.com thấy địa chỉ IP được ping ddeenss là 192.176.45.101 của máy attacker
+
+![ảnh](https://hackmd.io/_uploads/ByiuRM6CT.png)
+
+- và mình kiểm tra bên máy attacker thấy ettercap đã phát hiên victim truy cập facebook.com và giả mạo nó thành 192.176.45.101
+
+![ảnh](https://hackmd.io/_uploads/ByE9-Ma0T.png)
+
+- khi victim truy cập facebook.com trên trình duyệt mình thấy nó không truy cập được
+
+![ảnh](https://hackmd.io/_uploads/S1SK0zTCa.png)
+
+- mình thấy thông báo bên kali không forward được ipv6
+
+![ảnh](https://hackmd.io/_uploads/ryjAGfpRT.png)
+
+- và trang http mình chạy cũng chưa được request đến
+
+![ảnh](https://hackmd.io/_uploads/SkOd7f6R6.png)
+
+- mình dùng **setoolkit** để giả mạo lại trang facebook khi victim truy cập domain facebook.com
+
+![ảnh](https://hackmd.io/_uploads/S1Hk4Gp0p.png)
+
+- chọn 1
+
+![ảnh](https://hackmd.io/_uploads/Sy0MVG6R6.png)
+
+- chọn 2
+
+![ảnh](https://hackmd.io/_uploads/r1CENfTCT.png)
+
+- chọn 3
+
+![ảnh](https://hackmd.io/_uploads/ryV0VfpRa.png)
+
+- chọn 2
+
+![ảnh](https://hackmd.io/_uploads/BJ4WBf6AT.png)
+
+- tiếp theo mình nhập url: http://www.facebook.com
+
+![ảnh](https://hackmd.io/_uploads/SyOpHMpRT.png)
+
+- và tool này đã clone trang login của facebook cho chúng ta
+
+![ảnh](https://hackmd.io/_uploads/S1bhPfpCT.png)
+
+- và khi victim truy cập vào domain facebook thì sẽ truy cập vào ip của chúng ta là 192.176.45.101 và trang web clone lại facebook của chúng ta sẽ hiện lên
+- khi victim đăng nhập thì mật khẩu tài khoản của họ bị chúng tâ theo dõi và gửi về màn hình cho attacker
+
+- sau đó mình stop để dừng tấn công
+
+![ảnh](https://hackmd.io/_uploads/BJRoTGaAT.png)
+
+- và victim có thể ping đến facebook.com với IP thực
+
+![ảnh](https://hackmd.io/_uploads/S19UCGpC6.png)
+
+- các bạn có thể xem cách khai thác dns spooding với công cụ **ettercap** <a href="https://www.youtube.com/watch?v=g-XZpTxusS8&t=280s"> tại đây</a> và <a href="https://www.youtube.com/watch?v=TNr2DlwtIu0"> tại đây</a>
 
 ## Tham khảo
 
