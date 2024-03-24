@@ -111,7 +111,7 @@ xem bảng ARP mình được
 
 kiểm tra firewal trên máy attacker bằng lệnh
 
-```bash!
+```bash
 iptables -L -v
 ```
 
@@ -129,7 +129,7 @@ bậy giờ chúng ta sẽ xây dựng đoạn script để sửa đổi gói ti
   - **Input chain** : lọc gói khi đi vào trong server.
   - **Output chain** : lọc gói khi ra khỏi server.
 
-```python!
+```python
 from scapy.all import *
 from netfilterqueue import NetfilterQueue
 import os
@@ -195,7 +195,7 @@ nhưng khi chạy nếu gặp phải các gói tin chứa các domain khác thì
 
 mình dùng đoạn code sau để khai thác dns spoofing trên máy victim mà chỉ khi gặp các gói tin trong list của chúng ta nó mới thay đổi
 
-```python!
+```python
 from scapy.all import *
 from netfilterqueue import NetfilterQueue
 import os
@@ -286,7 +286,7 @@ except KeyboardInterrupt:
 
 - sau đó dùng module của python để tạo máy chủ web http chạy ở port 80 trên máy của attacker
 
-```bash!
+```bash
 python3 -m http.server  80
 ```
 
@@ -312,13 +312,13 @@ chúng ta chạy file arpspoof.py để khai thác MITM như bài trước và c
 
 - mình sửa câu lệnh trong iptables thành
 
-```bash!
+```bash
 iptables -A INPUT -j NFQUEUE --queue-num 0
 ```
 
 để lọc các gói khi đi vào trong máy tính attacker và chúng ta sẽ khai thác trên máy local của attacker và được đoạn code sau:
 
-```python!
+```python
 from scapy.all import *
 from netfilterqueue import NetfilterQueue
 import os
