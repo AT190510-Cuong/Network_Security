@@ -213,11 +213,15 @@ exploit -j
 
 ### xem thông tin hệ thống
 
+![ảnh](https://hackmd.io/_uploads/r1mUBbZk0.png)
+
 - đầu tiên mình có thể xem thông tin chung của máy victim với lệnh `sysinfo`
 
 ![image](https://hackmd.io/_uploads/BksILdCC6.png)
 
 ### xem thông tin mạng
+
+![ảnh](https://hackmd.io/_uploads/r1LXHWbkC.png)
 
 - tiếp theo mình có thể xem thông tin cấu hình mạng của máy victim
 
@@ -241,7 +245,9 @@ exploit -j
 
 ### xem thông tin các file thư mục
 
-- sau đó mình thử tạo 1 thư mục có tên **secret_network_security** trong Desktop
+![ảnh](https://hackmd.io/_uploads/SkwC4W-1C.png)
+
+- mình thử tạo 1 thư mục có tên **secret_network_security** trong Desktop của victim
 
 ![image](https://hackmd.io/_uploads/SkQSw_00T.png)
 
@@ -265,6 +271,8 @@ exploit -j
 
 ### xem ảnh chụp màn hình
 
+![ảnh](https://hackmd.io/_uploads/rkvdSZ-kC.png)
+
 - attacker cũng có thể chụp ảnh màn hình của victim và ảnh được lưu vào Desktop
 
 ![image](https://hackmd.io/_uploads/SkffKO0Ap.png)
@@ -287,11 +295,19 @@ exploit -j
 
 ### xem webcam
 
+![ảnh](https://hackmd.io/_uploads/ByL9BbbkC.png)
+
 - attacker có thể theo dõi được camera máy tính của victim
 
 - do máy victim của mình không có camera nên mình không thể xem được
 
 ![ảnh](https://hackmd.io/_uploads/BySoPtCAa.png)
+
+### nghe lén đoạn ghi âm
+
+- attacker có thể theo dõi được các âm thanh trên máy tính của victim
+
+![ảnh](https://hackmd.io/_uploads/Hyvn7ZZyC.png)
 
 ### Shutdow máy victim
 
@@ -319,6 +335,45 @@ exploit -j
 - sau khi tấn công xong mình bật lại firewall và thực hiện lại cuộc tấn công và vẫn thành công trên máy window 7
 
 ![image](https://hackmd.io/_uploads/BJfZ1sC0a.png)
+
+## khai thác thông qua dịch vụ SMB
+
+- mình scan dịch vụ SMB trên máy victim tai IP 192.176.45.102
+
+```bash
+use auxiliary/scanner/smb/smb_version
+```
+
+![ảnh](https://hackmd.io/_uploads/B1NCweWyC.png)
+
+- xem các options cần thiết lập và mình chạy nó
+- mình xem các yêu cầu cấu hình với lệnh
+
+```bash
+show options
+```
+
+![image](https://hackmd.io/_uploads/HkNo7fWyA.png)
+
+![ảnh](https://hackmd.io/_uploads/S17V_xWJ0.png)
+
+![ảnh](https://hackmd.io/_uploads/SJdIslbJ0.png)
+
+![ảnh](https://hackmd.io/_uploads/SkTuilZJA.png)
+
+![ảnh](https://hackmd.io/_uploads/SJwEhgZ1A.png)
+
+- nhưng do máy victim dùng hệ thống x86 nên payload không thể thực hiện do nó chỉ support cho hệ thống x64 mặc dù đã phát hiện lỗ hổng
+
+- tiếp theo mình khai thác trên máy window 7 khác với hệ thống x64 nhưng đã bị ngăn chặn do Bkav đã ngăn chặn
+
+![ảnh](https://hackmd.io/_uploads/B1Ba6g-yC.png)
+
+![ảnh](https://hackmd.io/_uploads/HytUfbWJR.png)
+
+![image](https://hackmd.io/_uploads/HJluzN-J0.png)
+
+- các bạn có thể xem thêm <a href= "https://www.youtube.com/watch?v=CiKVLYvGtsc&t=344s">tại đây</a>
 
 ## Tham khảo
 
