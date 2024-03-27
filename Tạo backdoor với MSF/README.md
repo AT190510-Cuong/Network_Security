@@ -338,7 +338,22 @@ exploit -j
 
 ## khai thác thông qua dịch vụ SMB
 
-- mình scan dịch vụ SMB trên máy victim tai IP 192.176.45.102
+- Dịch vụ SMB được sử dụng để chia sẻ tệp và thông tin giữa các máy chủ từ xa. Eternalblue hưởng lợi từ cách SMBv1 và SMBv2 điều khiển các gói được vận chuyển. Kết quả là kẻ tấn công có thể sử dụng kỹ thuật Thực thi mã từ xa.
+
+| Tiêu Chí            | SMB                                                            | FTP                                                                       |
+| ------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Hỗ trợ hệ điều hành | Chủ yếu trong môi trường Windows                               | Có thể hoạt động trên nhiều hệ điều hành (Windows, Linux, macOS)          |
+| Cách hoạt động      | Tạo kết nối trực tiếp giữa máy tính và máy chủ chia sẻ         | Dựa trên mô hình client-server, máy tính kết nối đến máy chủ FTP          |
+| Bảo mật             | Cung cấp tùy chọn xác thực và quản lý quyền truy cập           | Cần sử dụng các phương pháp bảo mật bổ sung như FTPS hoặc SFTP            |
+| Hiệu suất           | Có thể đạt được hiệu suất truyền tải tốt hơn trong mạng nội bộ | Hiệu suất truyền tải có thể thấp hơn do cần sử dụng kết nối client-server |
+
+|
+
+- scan mạng với nmap mình được các port mở trên máy victim trong đó có mở port 445 cho dịch vụ SMB
+
+![ảnh](https://hackmd.io/_uploads/SkbtK67Aa.png)
+
+- mình scan dịch vụ SMB trên máy victim tai IP 192.176.45.102 với MSF
 
 ```bash
 use auxiliary/scanner/smb/smb_version
@@ -355,6 +370,8 @@ show options
 
 ![image](https://hackmd.io/_uploads/HkNo7fWyA.png)
 
+- và phát hiên được version dùng ở máy victim
+
 ![ảnh](https://hackmd.io/_uploads/S17V_xWJ0.png)
 
 ![ảnh](https://hackmd.io/_uploads/SJdIslbJ0.png)
@@ -365,7 +382,7 @@ show options
 
 - nhưng do máy victim dùng hệ thống x86 nên payload không thể thực hiện do nó chỉ support cho hệ thống x64 mặc dù đã phát hiện lỗ hổng
 
-- tiếp theo mình khai thác trên máy window 7 khác với hệ thống x64 nhưng đã bị ngăn chặn do Bkav đã ngăn chặn
+- tiếp theo mình khai thác trên máy window 7 khác với hệ thống x64 có IP là 192.176.45.103 nhưng đã bị ngăn chặn do Bkav đã ngăn chặn
 
 ![ảnh](https://hackmd.io/_uploads/B1Ba6g-yC.png)
 
